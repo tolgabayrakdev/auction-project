@@ -8,7 +8,7 @@ router = APIRouter()
 
 
 @router.post("/login")
-async def login(user: UserLogin, response: Response):
+async def login(user: UserLogin, response: Response) -> str:
     result = AuthService.login(user.email, user.password)
     if result is None:
         raise HTTPException(status_code=400, detail="Username or password wrong!")
