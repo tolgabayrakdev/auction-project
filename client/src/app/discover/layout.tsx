@@ -1,3 +1,4 @@
+import Sidebar from "@/components/discover/sidebar";
 import React from "react";
 
 function DiscoverLayout({
@@ -5,8 +6,10 @@ function DiscoverLayout({
 }: {
     children: React.ReactNode
 }) {
+    
     return (
         <section>
+            <Sidebar />
             {children}
         </section>
     )
