@@ -1,10 +1,5 @@
-"use client"
+'use client';
 
 export default function Home() {
-
-  return (
-    <main>     
-      Content
-    </main>
-  )
+  return <main>Content</main>;
 }
