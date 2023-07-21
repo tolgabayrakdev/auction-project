@@ -3,12 +3,13 @@ from service.auth_service import AuthService
 from schema.user import UserLogin, UserRegister
 from fastapi import Response
 from fastapi import HTTPException
-
+from fastapi import Request
+import jwt
 router = APIRouter()
 
 
 @router.post("/login")
-async def login(user: UserLogin, response: Response) -> str:
+async def login(user: UserLogin, response: Response):
     result = AuthService.login(user.email, user.password)
     if result is None:
         raise HTTPException(status_code=400, detail="Username or password wrong!")
@@ -32,6 +33,13 @@ async def register(user: UserRegister):
     else:
         raise HTTPException(status_code=400, detail="Invalid format")
 
+
+@router.post("/verify", status_code=200)
+async def verify_user(request: Request):
+    auth_header = request.cookies.get("access_token")
+    if auth_header:
+        decoded_token = jwt.decode(auth_header, "secret", algorithms=["HS256"])
+        return {"message": "ok"}
 
     
 @router.post("/logout")
