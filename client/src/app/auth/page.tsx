@@ -4,7 +4,7 @@ import { z } from "zod";
 import { TextInput, PasswordInput, Tabs, Button } from '@mantine/core';
 import { IconPhoto, IconMessageCircle, IconLogin, IconRegistered } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
-import { useForm, zodResolver } from '@mantine/form';
+import { useRouter } from 'next/navigation';
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email! " }),
@@ -12,6 +12,7 @@ const loginSchema = z.object({
 })
 
 export default function page() {
+  const router = useRouter();
   // Login Form
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,21 +24,75 @@ export default function page() {
 
 
 
-  const handleLogin = (e: any) => {
+  const handleLogin = async (e: any) => {
     e.preventDefault();
-    notifications.show({
-      title: 'Login Default notification',
-      message: 'Hey there, your code is awesome! 🤥',
-    })
+    try {
+      const res = await fetch("http://localhost:8001/api/v1/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({ email: email, password: password })
+      })
+      if (res.status === 200 && res.ok) {
+        notifications.show({
+          title: 'Successful',
+          message: 'You are redirect...',
+        })
+        setTimeout(() => {
+          router.push("/discover")
+        }, 1000)
+      } else if (res.status === 400) {
+        notifications.show({
+          title: 'Error',
+          message: 'Check your credentials!',
+          color: "yellow"
+        })
+      }
+    } catch (err) {
+      notifications.show({
+        title: 'Error',
+        message: 'Something gone wrong!',
+        color: "red"
+      })
+    }
+
 
   }
 
-  const handleRegister = (e: any) => {
+  const handleRegister = async (e: any) => {
     e.preventDefault();
-    notifications.show({
-      title: 'Register Default notification',
-      message: 'Hey there, your code is awesome! 🤥',
-    })
+    try {
+      const res = await fetch("http://localhost:8001/api/v1/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({ username: rusername, email: remail, password: rpassword })
+      })
+      if (res.status === 201) {
+        notifications.show({
+          title: 'Successful',
+          message: 'Account created.',
+        })
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+      } else {
+        notifications.show({
+          title: 'Error',
+          message: 'Check your credentials!',
+          color: "yellow"
+        })
+      }
+    } catch (error) {
+      console.log(error);
+      notifications.show({
+        title: 'Error',
+        message: 'Something gone wrong!',
+        color: "red"
+      })
+    }
 
   }
 
