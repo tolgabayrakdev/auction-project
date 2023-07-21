@@ -1,12 +1,14 @@
 'use client';
+import { MantineProvider } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 
-import { CacheProvider } from '@chakra-ui/next-js';
-import { ChakraProvider } from '@chakra-ui/react';
+
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <CacheProvider>
-      <ChakraProvider>{children}</ChakraProvider>
-    </CacheProvider>
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <Notifications />
+      {children}
+    </MantineProvider>
   );
 }

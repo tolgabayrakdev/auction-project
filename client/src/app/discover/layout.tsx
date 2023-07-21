@@ -1,4 +1,6 @@
+"use client"
 import Sidebar from '@/components/discover/sidebar';
+import AuthWrapper from '@/util/auth-wrapper';
 import React from 'react';
 
 function DiscoverLayout({ children }: { children: React.ReactNode }) {
@@ -10,4 +12,4 @@ function DiscoverLayout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default DiscoverLayout;
+export default AuthWrapper(DiscoverLayout);
