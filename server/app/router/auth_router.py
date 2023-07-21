@@ -19,7 +19,7 @@ async def login(user: UserLogin, response: Response) -> str:
     return {"message": "Login is successful"}
 
 
-@router.post("/register")
+@router.post("/register", status_code=201)
 async def register(user: UserRegister):
     if user is not None:
         try:

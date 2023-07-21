@@ -21,9 +21,7 @@ class AuthService:
         user = User(
             username=payload.username,
             email=payload.email,
-            password=Helper.generate_hash_password(payload.password),
-            address=payload.address,
-            phone_number=payload.phone_number,
+            password=Helper.generate_hash_password(payload.password)
         )
         db.add(user)
         db.commit()

@@ -10,5 +10,4 @@ class UserRegister(BaseModel):
     username: str
     email: str
     password: str
-    address: str
-    phone_number: str
+   
