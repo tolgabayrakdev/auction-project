@@ -12,17 +12,7 @@ const DiscoverPage = () => {
   const products = [
     { id: 1, name: 'Ürün 1', price: 19.99 },
     { id: 1, name: 'Ürün 1', price: 19.99 },
-    { id: 1, name: 'Ürün 1', price: 19.99 },
-    { id: 1, name: 'Ürün 1', price: 19.99 },
-    { id: 1, name: 'Ürün 1', price: 19.99 },
-    { id: 1, name: 'Ürün 1', price: 19.99 },
-    { id: 1, name: 'Ürün 1', price: 19.99 },
-    { id: 1, name: 'Ürün 1', price: 19.99 },
-    { id: 1, name: 'Ürün 1', price: 19.99 },
-    { id: 1, name: 'Ürün 1', price: 19.99 },
-
-
-    // Diğer ürünler...
+    { id: 1, name: 'Ürün 1', price: 19.99 }
   ];
 
   // Şu anki sayfa numarasını tutacak bir state değişkeni
