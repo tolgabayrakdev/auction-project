@@ -39,7 +39,15 @@ async def verify_user(request: Request):
     auth_header = request.cookies.get("access_token")
     if auth_header:
         decoded_token = jwt.decode(auth_header, "secret", algorithms=["HS256"])
-        return {"message": "ok"}
+        id = decoded_token["payload"]["user_id"]
+        result = AuthService.user_information(id)
+        print(result.id, result.username)
+        return {"success": "true", "user": {
+            "username": result.username,
+            "email": result.email,
+            "phone_number": result.phone_number,
+            "address": result.address
+        } }
 
     
 @router.post("/logout")

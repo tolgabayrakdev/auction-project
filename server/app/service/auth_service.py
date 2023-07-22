@@ -26,3 +26,11 @@ class AuthService:
         db.add(user)
         db.commit()
         return user
+    
+    @staticmethod
+    def user_information(id: int):
+        user = db.query(User).filter_by(id=id).first()
+        if user:
+            return user
+        else:
+            return False
