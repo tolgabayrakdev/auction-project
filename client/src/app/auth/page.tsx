@@ -5,6 +5,7 @@ import { TextInput, PasswordInput, Tabs, Button } from '@mantine/core';
 import { IconPhoto, IconMessageCircle, IconLogin, IconRegistered } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email! " }),
@@ -133,7 +134,7 @@ export default function page() {
                     </div>
                     <div className="flex items-center justify-between">
 
-                      <a href="#" className="text-sm text-dark font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
+                      <Link href="/auth/reset-password" className="text-sm text-dark font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</Link>
                     </div>
                     <Button variant="outline" type="submit">
                       Sign In

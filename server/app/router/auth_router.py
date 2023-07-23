@@ -49,7 +49,18 @@ async def verify_user(request: Request):
             "address": result.address
         } }
 
-    
+
+@router.post("/generate-token", status_code=201)
+async def reset_password(email: str):
+    result = AuthService.generate_reset_token(email)
+    if result:
+        return {"success": "true", "message": "Created"}
+    else:
+        raise HTTPException(status_code=400, detail="Invalid Request")
+
+
+
+
 @router.post("/logout")
 async def logout(response: Response):
     response.delete_cookie("access_token")
