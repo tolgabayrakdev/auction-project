@@ -37,7 +37,7 @@ async def register(user: UserRegister):
 @router.post("/verify", status_code=200)
 async def verify_user(request: Request):
     auth_header = request.cookies.get("access_token")
-    if auth_header:
+    if auth_header is not None:
         decoded_token = jwt.decode(auth_header, "secret", algorithms=["HS256"])
         id = decoded_token["payload"]["user_id"]
         result = AuthService.user_information(id)
@@ -48,6 +48,8 @@ async def verify_user(request: Request):
             "phone_number": result.phone_number,
             "address": result.address
         } }
+    else:
+        raise HTTPException(status_code=401, detail="Unauthorization")
 
 
 @router.post("/generate-token", status_code=201)

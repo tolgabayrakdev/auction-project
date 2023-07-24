@@ -54,3 +54,4 @@ class AuthService:
     @staticmethod
     def verify_reset_token(token: str):
         current_time = datetime.utcnow()
+        reset_token = db.query(PasswordReset)
