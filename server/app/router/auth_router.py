@@ -1,8 +1,9 @@
 from fastapi import APIRouter
 from service.auth_service import AuthService
-from schema.user import UserLogin, UserRegister
+from schema.user import UserLogin, UserRegister, UserResetToken
 from fastapi import Response
 from fastapi import HTTPException
+from fastapi import Request
 from fastapi import Request
 import jwt
 router = APIRouter()
@@ -53,13 +54,20 @@ async def verify_user(request: Request):
 
 
 @router.post("/generate-token", status_code=201)
-async def reset_password(email: str):
-    result = AuthService.generate_reset_token(email)
+async def reset_password(body: UserResetToken):
+    result = AuthService.generate_reset_token(body.email)
     if result:
         return {"success": "true", "message": "Created"}
     else:
         raise HTTPException(status_code=400, detail="Invalid Request")
+    
 
+@router.post("/verify-token/{token}")
+async def verify_reset_token(token: str):
+    print("ddsdskj")
+    print(token)
+    result = AuthService.verify_reset_token(token)
+    return result
 
 
 
