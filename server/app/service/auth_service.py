@@ -3,7 +3,7 @@ from model import User, PasswordReset
 from util.helper import Helper
 import uuid
 from datetime import datetime, timedelta
-
+from fastapi  import HTTPException
 db = SessionLocal()
 
 
@@ -54,3 +54,9 @@ class AuthService:
     @staticmethod
     def verify_reset_token(token: str):
         current_time = datetime.utcnow()
+        reset_token = db.query(PasswordReset).filter(PasswordReset.token == token).first()
+        if not reset_token:
+            raise HTTPException(status_code=404, detail="Token invalid")
+        if reset_token.expiration_date < current_time:
+            raise HTTPException(status_code=400, detail="Token has expired")   
+        return {"message": "success"}
