@@ -52,3 +52,15 @@ class Offer(Base):
     offer_date = Column(DateTime)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
+class PasswordReset(Base):
+    __tablename__ = "password_resets"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String)
+    token = Column(String, unique=True)
+    expiration_date = Column(DateTime)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+

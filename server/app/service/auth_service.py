@@ -1,6 +1,8 @@
 from database import SessionLocal
-from model import User
+from model import User, PasswordReset
 from util.helper import Helper
+import uuid
+from datetime import datetime, timedelta
 
 db = SessionLocal()
 
@@ -34,3 +36,21 @@ class AuthService:
             return user
         else:
             return False
+        
+
+    @staticmethod
+    def generate_reset_token(email: str):
+        db.query(PasswordReset).filter(PasswordReset.email == email).delete()
+        token = str(uuid.uuid4())
+        expiration_date = datetime.utcnow() + timedelta(minutes=15)
+
+        new_token = PasswordReset(
+            email=email, token=token, expiration_date=expiration_date
+        )
+        db.add(new_token)
+        db.commit()
+        return {"message": "success", "token": token}
+    
+    @staticmethod
+    def verify_reset_token(token: str):
+        current_time = datetime.utcnow()
