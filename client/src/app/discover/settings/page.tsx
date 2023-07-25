@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
 export default function Settings({}: Props) {
   return (
     <div>
-        <h1>Settings</h1>
+      <h1>Settings</h1>
     </div>
-  )
+  );
 }

@@ -37,9 +37,8 @@ function AuthWrapper(WrappedComponent: any) {
         <>
           <div className="">
             <p className="text-center text-xl ">
-             <span className='text-red-600'>
-             Access denied !
-              </span> , you can not view this page
+              <span className="text-red-600">Access denied !</span> , you can
+              not view this page
             </p>
             <div className="text-center">
               <Link className="text-blue-500 hover:underline" href="/auth">
