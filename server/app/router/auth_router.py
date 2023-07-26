@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from service.auth_service import AuthService
-from schema.user import UserLogin, UserRegister, UserResetToken
+from schema.user import UserLogin, UserRegister, UserResetToken, UserChangePassword
 from fastapi import Response
 from fastapi import HTTPException
 from fastapi import Request
@@ -64,10 +64,17 @@ async def reset_password(body: UserResetToken):
 
 @router.post("/verify-token/{token}")
 async def verify_reset_token(token: str):
-    print("ddsdskj")
-    print(token)
     result = AuthService.verify_reset_token(token)
-    return result
+    return {"message": result}
+        
+
+@router.put("/change-password/{token}")
+async def change_password(body: UserChangePassword, token: str):
+    try:
+        result = AuthService.change_password(token=token, new_password=body.password)
+        return result
+    except HTTPException as e:
+        raise e
 
 
 
