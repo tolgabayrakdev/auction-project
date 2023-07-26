@@ -13,4 +13,7 @@ class UserRegister(BaseModel):
    
 
 class UserResetToken(BaseModel):
-    email: str    
+    email: str
+
+class UserChangePassword(BaseModel):
+    password: str    

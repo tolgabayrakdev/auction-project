@@ -10,34 +10,30 @@ export default function Sidebar(props: any) {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch("http://localhost:8001/api/v1/auth/logout", {
-        method: "POST",
-        credentials: "include"
-      })
+      const res = await fetch('http://localhost:8001/api/v1/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
       if (res.status === 200) {
         notifications.show({
           color: 'green',
           title: 'Success.',
           message: 'You are being redirect.',
-          autoClose: 1500
-        })
+          autoClose: 1500,
+        });
         setTimeout(() => {
-          router.push("/auth")
-        }, 1500)
+          router.push('/auth');
+        }, 1500);
       }
     } catch (error) {
       console.log(error);
-
     }
-  }
-
-
+  };
 
   return (
     <>
-      {
-        props.isOpen && <aside className="flex duration-300 flex-col w-56 h-screen px-4 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
-
+      {props.isOpen && (
+        <aside className="flex duration-300 flex-col w-56 h-screen px-4 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
           <div className="text-white text-xl flex justify-between">
             <h3>Deneme</h3>
           </div>
@@ -171,27 +167,32 @@ export default function Sidebar(props: any) {
               </a>
             </nav>
 
-
             <div className="flex items-center px-4 -mx-2 ml-3">
-
               <Popover width={200} position="bottom" withArrow shadow="md">
                 <Popover.Target>
-                  <Button variant="default" className='text-gray-100 hover:bg-gray-900' >Tolga BAYRAK</Button>
+                  <Button
+                    variant="default"
+                    className="text-gray-100 hover:bg-gray-900"
+                  >
+                    Tolga BAYRAK
+                  </Button>
                 </Popover.Target>
-                <Popover.Dropdown className='bg-gray-800'>
-                  <p className='text-center text-white'>Accounts</p>
+                <Popover.Dropdown className="bg-gray-800">
+                  <p className="text-center text-white">Accounts</p>
                   <Divider />
-                  <Text onClick={handleLogout} size="sm" className='text-center text-white mt-3 hover:underline hover:cursor-pointer hover:text-gray-300'>
+                  <Text
+                    onClick={handleLogout}
+                    size="sm"
+                    className="text-center text-white mt-3 hover:underline hover:cursor-pointer hover:text-gray-300"
+                  >
                     Log out
                   </Text>
                 </Popover.Dropdown>
               </Popover>
-
             </div>
           </div>
         </aside>
-      }
+      )}
     </>
-
   );
 }
