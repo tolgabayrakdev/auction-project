@@ -5,6 +5,4 @@ class CreateProduct(BaseModel):
     title: str
     about: str
     starting_price: float
-    current_price: float
     end_date: datetime
-    status: bool

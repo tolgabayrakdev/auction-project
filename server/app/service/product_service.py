@@ -13,9 +13,9 @@ class ProductService:
                 title=data.title,
                 about=data.about,
                 starting_price=data.starting_price,
-                current_price=data.current_price,
+                current_price=data.starting_price,
                 end_date=data.end_date,
-                status=data.status,
+                status=True,
                 user_id=data.user_id
             )
             db.add(product)
