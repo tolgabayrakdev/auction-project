@@ -29,13 +29,15 @@ export default function page({}: Props) {
         </form>
       </Modal>
 
-      <h1>My Products</h1>
-      <Divider />
       <div className="mt-4">
         <Button onClick={open} variant="default">
           New Product +
         </Button>
+        
       </div>
+
+      <h1 className='mt-3'>My Products</h1>
+      <Divider />
     </div>
   );
 }
