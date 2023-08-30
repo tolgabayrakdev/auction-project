@@ -5,7 +5,6 @@ import uuid
 from datetime import datetime, timedelta
 from fastapi import HTTPException
 import smtplib
-from smtplib import SMTPException
 
 db = SessionLocal()
 
@@ -25,6 +24,7 @@ class AuthService:
             username=payload.username,
             email=payload.email,
             password=Helper.generate_hash_password(payload.password),
+            role_id = 1
         )
         db.add(user)
         db.commit()

@@ -26,7 +26,7 @@ async def register(user: UserRegister):
     if user is not None:
         try:
             AuthService.register(user)
-            return {"message": "User created succesfull."}
+            return {"message": "User created succesful."}
         except:
             raise HTTPException(
                 status_code=400, detail="Username or password already used!"
